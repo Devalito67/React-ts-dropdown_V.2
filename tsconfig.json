@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "ES5",
+      "target": "ESNext",
       "module": "ESNext",
       "declaration": true,
       "declarationMap": true,
@@ -12,7 +12,8 @@
       "moduleResolution": "Node",
       "esModuleInterop": true,
       "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
+      "forceConsistentCasingInFileNames": true,
+      "lib": ["ESNext", "DOM"] 
     },
     "include": ["src"],
     "exclude": ["node_modules", "dist"]
