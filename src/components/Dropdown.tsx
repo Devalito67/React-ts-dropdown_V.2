@@ -25,8 +25,8 @@ export default function Dropdown({ items, onChange}: { items: string[] | { name:
         setSelectedIndex(index);
         setIsOpen(false);
         console.log('Option clicked:', option);
-        console.log('Value to send to onChange by click:', dropDownValue);
-        onChange(dropDownValue);
+        console.log('Value to send to onChange by click:', option);
+        onChange(option);
     }
 
     const handleKeyDownList = (e: React.KeyboardEvent<HTMLUListElement>) => {
@@ -43,8 +43,8 @@ export default function Dropdown({ items, onChange}: { items: string[] | { name:
             case "Enter":
                 setDropDownValue(optionsSort[selectedIndex]);
                 setIsOpen(false);
-                console.log('Value to send to onChange by enter:', dropDownValue);
-                onChange(dropDownValue);
+                console.log('Value to send to onChange by enter:', optionsSort[selectedIndex]);
+                onChange(optionsSort[selectedIndex]);
                 break;
             case "Escape":
                 setIsOpen(false)
