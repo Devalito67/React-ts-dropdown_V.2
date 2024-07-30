@@ -1,11 +1,16 @@
 {
-  "name": "react-ts-component",
-  "version": "1.0.0",
-  "description": "A simple React component in TypeScript",
+  "name": "react-ts-dropdown2",
+  "description": "A simple React dropdown component in TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "version": "1.0.3",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "postbuild": "xcopy src\\styles dist\\styles /E /I /H /Y",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "react",
