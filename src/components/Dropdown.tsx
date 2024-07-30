@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import React from "react"
 import "../styles/Dropdown.css"
 
-export default function Dropdown({ items, label }: { items: string[] | { name: string; abbreviation: string }[], label: string }) {
+export default function Dropdown({ items, label, onChange }: { items: string[] | { name: string; abbreviation: string }[], label: string, onChange:(value:string) => void }) {
     //state
     const isObjectArray = typeof items[0] === 'object';
     const options = isObjectArray ? (items as { name: string; abbreviation: string }[]).map(item => item.name) : (items as string[]);
@@ -24,6 +24,7 @@ export default function Dropdown({ items, label }: { items: string[] | { name: s
         setDropDownValue(option);
         setSelectedIndex(index);
         setIsOpen(false);
+        onChange(isObjectArray ? abbreviations[selectedIndex] : optionsSort[selectedIndex]);
     }
 
     const handleKeyDownList = (e: React.KeyboardEvent<HTMLUListElement>) => {
@@ -38,8 +39,9 @@ export default function Dropdown({ items, label }: { items: string[] | { name: s
                 e.preventDefault();
                 break;
             case "Enter":
-                setDropDownValue(optionsSort[selectedIndex])
-                setIsOpen(false)
+                setDropDownValue(optionsSort[selectedIndex]);
+                setIsOpen(false);
+                onChange(isObjectArray ? abbreviations[selectedIndex] : optionsSort[selectedIndex]);
                 break;
             case "Escape":
                 setIsOpen(false)
