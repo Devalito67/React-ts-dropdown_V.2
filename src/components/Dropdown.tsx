@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import React from "react"
 import "../styles/Dropdown.css"
 
-export default function Dropdown({ items, label, onChange }: { items: string[] | { name: string; abbreviation: string }[], label: string, onChange:(value:string) => void }) {
+export default function Dropdown({ items, onChange}: { items: string[] | { name: string; abbreviation: string }[], onChange:(value:string) => void }) {
     //state
     const isObjectArray = typeof items[0] === 'object';
     const options = isObjectArray ? (items as { name: string; abbreviation: string }[]).map(item => item.name) : (items as string[]);
@@ -93,8 +93,6 @@ export default function Dropdown({ items, label, onChange }: { items: string[] |
 
     //Affichage
     return (
-        <div>
-            <label htmlFor="dropdown">{label}</label>
             <div className="dropdown-container">
                 <div className="value-container" onClick={handleClick} tabIndex={0} onKeyDown={handleKeyDownDropDown}>{dropDownValue}<span className="icon">&#9662;</span></div>
                 {isOpen &&
@@ -103,6 +101,5 @@ export default function Dropdown({ items, label, onChange }: { items: string[] |
                             <li className={selectedIndex === index ? "selected" : ""} key={index} onClick={() => optionClick(option, index)} onMouseEnter={() => handleMouseEnter(index)}>{option}</li>)}
                     </ul>}
             </div>
-        </div>
     )
 }
