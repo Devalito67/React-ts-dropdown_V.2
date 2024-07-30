@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import React from "react"
 import "../styles/Dropdown.css"
 
-export default function Dropdown({items} : {items: string[] | { name: string; abbreviation: string }[]}) {
+export default function Dropdown({ items, label }: { items: string[] | { name: string; abbreviation: string }[], label: string }) {
     //state
     const isObjectArray = typeof items[0] === 'object';
     const options = isObjectArray ? (items as { name: string; abbreviation: string }[]).map(item => item.name) : (items as string[]);
@@ -44,22 +44,22 @@ export default function Dropdown({items} : {items: string[] | { name: string; ab
             case "Escape":
                 setIsOpen(false)
                 break;
-                default:
-                    if (abbreviationKey.length === 1 && /^[A-Z]$/.test(abbreviationKey)) {
-                        const newTypedKeys = typedKeys.length === 1 ? typedKeys + abbreviationKey : abbreviationKey;
-                        setTypedKeys(newTypedKeys);
-                        console.log(typedKeys)
-    
-                        const index = abbreviations.findIndex(abbreviation => abbreviation.startsWith(newTypedKeys));
-                        if (index !== -1) {
-                            setSelectedIndex(index);
-                            setDropDownValue(optionsSort[index]);
-                            setIsOpen(true);
-                        }
-                        setTimeout(() => setTypedKeys(""), 500);
+            default:
+                if (abbreviationKey.length === 1 && /^[A-Z]$/.test(abbreviationKey)) {
+                    const newTypedKeys = typedKeys.length === 1 ? typedKeys + abbreviationKey : abbreviationKey;
+                    setTypedKeys(newTypedKeys);
+                    console.log(typedKeys)
+
+                    const index = abbreviations.findIndex(abbreviation => abbreviation.startsWith(newTypedKeys));
+                    if (index !== -1) {
+                        setSelectedIndex(index);
+                        setDropDownValue(optionsSort[index]);
+                        setIsOpen(true);
                     }
-                    break;
-        } 
+                    setTimeout(() => setTypedKeys(""), 500);
+                }
+                break;
+        }
     }
 
     const handleKeyDownDropDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -91,13 +91,16 @@ export default function Dropdown({items} : {items: string[] | { name: string; ab
 
     //Affichage
     return (
-        <div className="dropdown-container">
-            <div className="value-container" onClick={handleClick} tabIndex={0} onKeyDown={handleKeyDownDropDown}>{dropDownValue}<span className="icon">&#9662;</span></div>
-            {isOpen &&
-                <ul className="options-container" onKeyDown={handleKeyDownList} tabIndex={-1} ref={dropdownRef}>
-                    {optionsSort.map((option, index) =>
-                        <li className={selectedIndex === index ? "selected" : ""} key={index} onClick={() => optionClick(option, index)} onMouseEnter={() => handleMouseEnter(index)}>{option}</li>)}
-                </ul>}
+        <div>
+            <label htmlFor="dropdown">{label}</label>
+            <div className="dropdown-container">
+                <div className="value-container" onClick={handleClick} tabIndex={0} onKeyDown={handleKeyDownDropDown}>{dropDownValue}<span className="icon">&#9662;</span></div>
+                {isOpen &&
+                    <ul className="options-container" onKeyDown={handleKeyDownList} tabIndex={-1} ref={dropdownRef}>
+                        {optionsSort.map((option, index) =>
+                            <li className={selectedIndex === index ? "selected" : ""} key={index} onClick={() => optionClick(option, index)} onMouseEnter={() => handleMouseEnter(index)}>{option}</li>)}
+                    </ul>}
+            </div>
         </div>
     )
 }
