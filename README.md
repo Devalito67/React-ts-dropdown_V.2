@@ -9,7 +9,7 @@ Ce package NPM fournit un composant dropdown personnalisable et accessible pour 
 Pour installer le package, utilisez la commande suivante :
 
 ```bash
-npm install react-ts-dropdown
+npm install react-ts-dropdown2
 ```
 
 ## Utilisation
@@ -20,7 +20,7 @@ Voici un exemple d'utilisation du composant Dropdown avec un tableau simple de c
 ```javascript
 
 import React from 'react';
-import Dropdown from '@votre-nom-utilisateur/dropdown-component';
+import { Dropdown } from "react-ts-dropdown2";
 
 const items = ["Option 1", "Option 2", "Option 3"];
 
@@ -42,7 +42,7 @@ Le composant Dropdown peut également gérer un tableau d'objets. Chaque objet d
 ```javascript
 
 import React from 'react';
-import Dropdown from '@votre-nom-utilisateur/dropdown-component';
+import { Dropdown } from "react-ts-dropdown2";
 
 const items = [
   { name: "États-Unis", abbreviation: "US" },
